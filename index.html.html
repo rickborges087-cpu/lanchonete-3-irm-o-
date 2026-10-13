@@ -1,0 +1,2232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>3 Irmãos | Lanchonete</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050505;
+    color:white;
+}
+
+/* ===== HEADER ===== */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:75px;
+    z-index:1000;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 6%;
+
+    background:rgba(5,5,5,.88);
+    backdrop-filter:blur(15px);
+
+    border-bottom:1px solid #222;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo-icon{
+    font-size:34px;
+}
+
+.logo h1{
+    font-size:19px;
+    line-height:18px;
+}
+
+.logo span{
+    color:#ffc400;
+}
+
+nav{
+    display:flex;
+    gap:30px;
+}
+
+nav a{
+    color:#ddd;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#ffc400;
+}
+
+.cart-button{
+    border:0;
+    background:#ffc400;
+    color:#111;
+    padding:12px 18px;
+    border-radius:30px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.cart-button:hover{
+    transform:scale(1.05);
+}
+
+/* ===== HERO ===== */
+
+.hero{
+    min-height:720px;
+
+    display:flex;
+    align-items:center;
+
+    padding:120px 7% 70px;
+
+    position:relative;
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            #050505 0%,
+            rgba(5,5,5,.95) 30%,
+            rgba(5,5,5,.35) 100%
+        ),
+        url("https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1800&q=90");
+
+    background-size:cover;
+    background-position:center;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+
+    right:-200px;
+    bottom:-200px;
+
+    background:#ffc400;
+    filter:blur(180px);
+    opacity:.15;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:700px;
+}
+
+.hero small{
+    color:#ffc400;
+    font-size:18px;
+    font-weight:bold;
+    letter-spacing:3px;
+}
+
+.hero h2{
+    font-size:80px;
+    line-height:.9;
+    margin:15px 0 25px;
+    text-transform:uppercase;
+}
+
+.hero h2 span{
+    color:#ffc400;
+}
+
+.hero p{
+    color:#bbb;
+    max-width:560px;
+    font-size:18px;
+    line-height:1.6;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:15px;
+    margin-top:35px;
+}
+
+.btn{
+    padding:16px 28px;
+    border-radius:8px;
+    border:none;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-yellow{
+    background:#ffc400;
+    color:#111;
+}
+
+.btn-dark{
+    background:transparent;
+    border:1px solid #555;
+    color:white;
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+}
+
+/* ===== INFO ===== */
+
+.info{
+    background:#0d0d0d;
+    border-top:1px solid #222;
+    border-bottom:1px solid #222;
+}
+
+.info-content{
+    max-width:1200px;
+    width:90%;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+
+    gap:25px;
+
+    padding:25px 0;
+}
+
+.info-item{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.info-icon{
+    width:50px;
+    height:50px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:1px solid #ffc400;
+    border-radius:50%;
+
+    font-size:22px;
+}
+
+.info-item strong{
+    display:block;
+}
+
+.info-item span{
+    color:#777;
+    font-size:13px;
+}
+
+/* ===== SEÇÕES ===== */
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:90px auto;
+}
+
+.title{
+    margin-bottom:35px;
+}
+
+.title small{
+    color:#ffc400;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.title h2{
+    font-size:42px;
+    margin-top:7px;
+}
+
+.title p{
+    color:#777;
+    margin-top:7px;
+}
+
+/* ===== PRODUTOS ===== */
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.product{
+    background:#111;
+    border:1px solid #242424;
+    border-radius:15px;
+    overflow:hidden;
+
+    transition:.35s;
+}
+
+.product:hover{
+    transform:translateY(-8px);
+    border-color:#555;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.6);
+}
+
+.product-image{
+    height:210px;
+    overflow:hidden;
+    position:relative;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+
+    transition:.5s;
+}
+
+.product:hover img{
+    transform:scale(1.08);
+}
+
+.product-body{
+    padding:18px;
+}
+
+.product-body h3{
+    font-size:19px;
+    margin-bottom:8px;
+}
+
+.product-body p{
+    color:#888;
+    font-size:12px;
+    line-height:1.5;
+    min-height:40px;
+}
+
+.price{
+    color:#ffc400;
+    font-size:22px;
+    font-weight:bold;
+    margin:15px 0;
+}
+
+.add{
+    width:100%;
+    padding:12px;
+
+    border:0;
+    border-radius:7px;
+
+    background:#ffc400;
+    color:#111;
+
+    font-weight:bold;
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.add:hover{
+    background:white;
+}
+
+/* ===== DESTAQUES ===== */
+
+.featured{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.feature{
+    min-height:350px;
+    border-radius:18px;
+    overflow:hidden;
+    position:relative;
+}
+
+.feature img{
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+
+    transition:.5s;
+}
+
+.feature:hover img{
+    transform:scale(1.08);
+}
+
+.feature::after{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            transparent 25%,
+            rgba(0,0,0,.95)
+        );
+}
+
+.feature-info{
+    position:absolute;
+    z-index:2;
+    bottom:0;
+    padding:25px;
+}
+
+.feature-info h3{
+    font-size:25px;
+}
+
+.feature-info p{
+    color:#bbb;
+    font-size:13px;
+    margin:8px 0 15px;
+    line-height:1.4;
+}
+
+.feature-price{
+    color:#ffc400;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.feature-add{
+    margin-top:14px;
+    max-width:260px;
+}
+
+/* ===== LISTAS ===== */
+
+.lists{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.list{
+    background:#111;
+    border:1px solid #252525;
+    border-radius:15px;
+    padding:25px;
+}
+
+.list h3{
+    color:#ffc400;
+    margin-bottom:15px;
+    font-size:22px;
+}
+
+.list-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:13px 0;
+
+    border-bottom:1px solid #242424;
+}
+
+.list-item:last-child{
+    border-bottom:0;
+}
+
+.list-item strong{
+    color:#ffc400;
+}
+
+.plus{
+    border:0;
+    background:#242424;
+    color:#ffc400;
+
+    width:30px;
+    height:30px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+}
+
+/* ===== CARRINHO ===== */
+
+.cart{
+    position:fixed;
+
+    top:0;
+    right:-430px;
+
+    width:410px;
+    max-width:95%;
+
+    height:100vh;
+
+    background:#0b0b0b;
+
+    z-index:3000;
+
+    border-left:1px solid #333;
+
+    transition:.4s;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.cart.active{
+    right:0;
+}
+
+.cart-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:22px;
+
+    border-bottom:1px solid #292929;
+}
+
+.cart-header h2{
+    color:#ffc400;
+}
+
+.close{
+    background:none;
+    border:0;
+    color:white;
+    font-size:28px;
+    cursor:pointer;
+}
+
+.cart-items{
+    flex:1;
+    overflow:auto;
+    padding:20px;
+}
+
+.empty{
+    text-align:center;
+    color:#666;
+    margin-top:100px;
+}
+
+.cart-item{
+    padding:15px 0;
+    border-bottom:1px solid #282828;
+}
+
+.cart-item-top{
+    display:flex;
+    justify-content:space-between;
+}
+
+.cart-item-top strong:last-child{
+    color:#ffc400;
+}
+
+.quantity{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    margin-top:10px;
+}
+
+.quantity button{
+    width:28px;
+    height:28px;
+
+    border:0;
+    border-radius:5px;
+
+    background:#292929;
+    color:white;
+
+    cursor:pointer;
+}
+
+.delete{
+    color:#ff5555 !important;
+}
+
+.cart-footer{
+    padding:20px;
+    border-top:1px solid #292929;
+}
+
+.total{
+    display:flex;
+    justify-content:space-between;
+    font-size:22px;
+    margin-bottom:15px;
+}
+
+.total strong{
+    color:#ffc400;
+}
+
+.checkout{
+    width:100%;
+    padding:16px;
+
+    border:0;
+    border-radius:8px;
+
+    background:#ffc400;
+    color:#111;
+
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* ===== MODAL ===== */
+
+.modal{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.88);
+
+    z-index:4000;
+
+    display:none;
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modal-box{
+    width:600px;
+    max-width:100%;
+    max-height:90vh;
+    overflow:auto;
+
+    background:#111;
+
+    border:1px solid #333;
+    border-radius:16px;
+
+    padding:25px;
+}
+
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:25px;
+}
+
+.modal-head h2{
+    color:#ffc400;
+}
+
+.input{
+    margin-bottom:15px;
+}
+
+.input label{
+    display:block;
+    color:#aaa;
+    font-size:13px;
+    margin-bottom:6px;
+}
+
+.input input,
+.input textarea{
+    width:100%;
+
+    padding:13px;
+
+    background:#191919;
+    color:white;
+
+    border:1px solid #333;
+    border-radius:7px;
+
+    outline:none;
+}
+
+.input input:focus,
+.input textarea:focus{
+    border-color:#ffc400;
+}
+
+.payment{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.payment label{
+    padding:14px;
+    border:1px solid #333;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+.pix{
+    display:none;
+
+    background:#171717;
+
+    border:1px solid #ffc400;
+
+    padding:15px;
+    border-radius:8px;
+
+    margin-top:15px;
+}
+
+.pix.active{
+    display:block;
+}
+
+.pix strong{
+    color:#ffc400;
+}
+
+.send{
+    width:100%;
+
+    margin-top:20px;
+
+    padding:16px;
+
+    border:0;
+    border-radius:8px;
+
+    background:#25d366;
+    color:white;
+
+    font-weight:bold;
+    font-size:16px;
+
+    cursor:pointer;
+}
+
+/* ===== FOOTER ===== */
+
+footer{
+    text-align:center;
+    background:#080808;
+
+    padding:60px 20px;
+
+    border-top:1px solid #222;
+}
+
+footer h2{
+    color:#ffc400;
+}
+
+footer p{
+    color:#777;
+    margin-top:10px;
+}
+
+.whatsapp{
+    display:inline-block;
+
+    margin-top:20px;
+
+    padding:13px 22px;
+
+    background:#25d366;
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:8px;
+    font-weight:bold;
+}
+
+/* ===== RESPONSIVO ===== */
+
+@media(max-width:1000px){
+
+    .products{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .hero h2{
+        font-size:60px;
+    }
+}
+
+@media(max-width:750px){
+
+    nav{
+        display:none;
+    }
+
+    .info-content{
+        grid-template-columns:1fr;
+    }
+
+    .products{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .featured,
+    .lists{
+        grid-template-columns:1fr;
+    }
+
+    .hero h2{
+        font-size:48px;
+    }
+}
+
+@media(max-width:500px){
+
+    header{
+        padding:0 15px;
+    }
+
+    .logo h1{
+        font-size:15px;
+    }
+
+    .logo-icon{
+        font-size:27px;
+    }
+
+    .cart-button{
+        padding:10px 12px;
+        font-size:12px;
+    }
+
+    .hero{
+        min-height:650px;
+        padding:110px 25px 50px;
+    }
+
+    .hero h2{
+        font-size:43px;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+    }
+
+    .products{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .product-image{
+        height:140px;
+    }
+
+    .product-body{
+        padding:11px;
+    }
+
+    .product-body h3{
+        font-size:14px;
+    }
+
+    .product-body p{
+        font-size:10px;
+    }
+
+    .price{
+        font-size:17px;
+    }
+
+    .add{
+        font-size:11px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-icon">🍔</div>
+
+        <h1>
+            LANCHONETE<br>
+            <span>3 IRMÃOS</span>
+        </h1>
+
+    </div>
+
+    <nav>
+        <a href="#inicio">Início</a>
+        <a href="#cardapio">Cardápio</a>
+        <a href="#especiais">Especiais</a>
+        <a href="#contato">Contato</a>
+    </nav>
+
+    <button class="cart-button" onclick="abrirCarrinho()">
+        🛒 Pedido (<span id="contador">0</span>)
+    </button>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="inicio">
+
+    <div class="hero-content">
+
+        <small>🍔 LANCHONETE 3 IRMÃOS</small>
+
+        <h2>
+            SEU LANCHE<br>
+            <span>DO SEU JEITO.</span>
+        </h2>
+
+        <p>
+            Hambúrguer artesanal, porções, açaí e muito sabor.
+            Faça seu pedido online e receba em casa.
+        </p>
+
+        <div class="hero-buttons">
+
+            <button
+                class="btn btn-yellow"
+                onclick="document.getElementById('cardapio').scrollIntoView()">
+
+                🍔 VER CARDÁPIO
+
+            </button>
+
+            <button
+                class="btn btn-dark"
+                onclick="abrirCarrinho()">
+
+                🛒 MEU PEDIDO
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= INFO ================= -->
+
+<section class="info">
+
+    <div class="info-content">
+
+        <div class="info-item">
+
+            <div class="info-icon">🛵</div>
+
+            <div>
+                <strong>FAZEMOS DELIVERY</strong>
+                <span>Receba no conforto da sua casa</span>
+            </div>
+
+        </div>
+
+        <div class="info-item">
+
+            <div class="info-icon">💳</div>
+
+            <div>
+                <strong>PIX E CARTÃO</strong>
+                <span>Escolha a melhor forma de pagar</span>
+            </div>
+
+        </div>
+
+        <div class="info-item">
+
+            <div class="info-icon">📱</div>
+
+            <div>
+                <strong>(24) 99923-0095</strong>
+                <span>Faça seu pedido</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CARDÁPIO ================= -->
+
+<section class="container" id="cardapio">
+
+    <div class="title">
+
+        <small>🍔 NOSSO CARDÁPIO</small>
+
+        <h2>Hambúrgueres</h2>
+
+        <p>
+            Escolha seu lanche favorito.
+        </p>
+
+    </div>
+
+
+    <div class="products">
+
+
+        <!-- 1 -->
+
+        <div class="product">
+
+            <div class="product-image">
+
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=90">
+
+            </div>
+
+            <div class="product-body">
+
+                <h3>Hambúrguer</h3>
+
+                <p>
+                    Pão, carne, alface, batata palha e molho.
+                </p>
+
+                <div class="price">R$ 8,00</div>
+
+                <button class="add"
+                    onclick="adicionar('Hambúrguer',8)">
+                    🛒 ADICIONAR
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 2 -->
+
+        <div class="product">
+
+            <div class="product-image">
+
+                <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433a?auto=format&fit=crop&w=900&q=90">
+
+            </div>
+
+            <div class="product-body">
+
+                <h3>X-Burger</h3>
+
+                <p>
+                    Pão, carne, queijo, alface, batata palha e molho.
+                </p>
+
+                <div class="price">R$ 9,50</div>
+
+                <button class="add"
+                    onclick="adicionar('X-Burger',9.5)">
+                    🛒 ADICIONAR
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 3 -->
+
+        <div class="product">
+
+            <div class="product-image">
+
+                <img src="https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?auto=format&fit=crop&w=900&q=90">
+
+            </div>
+
+            <div class="product-body">
+
+                <h3>Egg-Burger</h3>
+
+                <p>
+                    Pão, carne, ovo, queijo, alface e molho.
+                </p>
+
+                <div class="price">R$ 11,00</div>
+
+                <button class="add"
+                    onclick="adicionar('Egg-Burger',11)">
+                    🛒 ADICIONAR
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 4 -->
+
+        <div class="product">
+
+            <div class="product-image">
+
+                <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=900&q=90">
+
+            </div>
+
+            <div class="product-body">
+
+                <h3>X-Egg-Burger</h3>
+
+                <p>
+                    Pão, carne, ovo, queijo, alface e molho.
+                </p>
+
+                <div class="price">R$ 11,50</div>
+
+                <button class="add"
+                    onclick="adicionar('X-Egg-Burger',11.5)">
+                    🛒 ADICIONAR
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 5 -->
+
+        <div class="product">
+
+            <div class="product-image">
+
+                <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=900&q=90">
+
+            </div>
+
+            <div class="product-body">
+
+                <h3>X-Bacon</h3>
+
+                <p>
+                    Pão, carne, queijo, bacon, alface e molho.
+                </p>
+
+                <div class="price">R$ 13,00</div>
+
+                <button class="add"
+                    onclick="adicionar('X-Bacon',13)">
+                    🛒 ADICIONAR
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 6 -->
+
+        <div class="product">
+
+            <div class="product-image">
+
+                <img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?auto=format&fit=crop&w=900&q=90">
+
+            </div>
+
+            <div class="product-body">
+
+                <h3>X-Egg-Bacon</h3>
+
+                <p>
+                    Pão, carne, ovo, bacon, queijo e molho.
+                </p>
+
+                <div class="price">R$ 15,00</div>
+
+                <button class="add"
+                    onclick="adicionar('X-Egg-Bacon',15)">
+                    🛒 ADICIONAR
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 7 -->
+
+        <div class="product">
+
+            <div class="product-image">
+
+                <img src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?auto=format&fit=crop&w=900&q=90">
+
+            </div>
+
+            <div class="product-body">
+
+                <h3>Cheddar Bacon</h3>
+
+                <p>
+                    Pão, carnes, bacon, cheddar, alface e molho.
+                </p>
+
+                <div class="price">R$ 17,50</div>
+
+                <button class="add"
+                    onclick="adicionar('Cheddar Bacon',17.5)">
+                    🛒 ADICIONAR
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 8 -->
+
+        <div class="product">
+
+            <div class="product-image">
+
+                <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=900&q=90">
+
+            </div>
+
+            <div class="product-body">
+
+                <h3>Cheddar Burger</h3>
+
+                <p>
+                    Pão, carne, cheddar, alface, tomate e molho.
+                </p>
+
+                <div class="price">R$ 10,90</div>
+
+                <button class="add"
+                    onclick="adicionar('Cheddar Burger',10.9)">
+                    🛒 ADICIONAR
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 9 -->
+
+        <div class="product">
+
+            <div class="product-image">
+
+                <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=900&q=90">
+
+            </div>
+
+            <div class="product-body">
+
+                <h3>X-Tudo</h3>
+
+                <p>
+                    Pão, carnes, ovo, queijo, bacon, alface e molho.
+                </p>
+
+                <div class="price">R$ 18,00</div>
+
+                <button class="add"
+                    onclick="adicionar('X-Tudo',18)">
+                    🛒 ADICIONAR
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 10 -->
+
+        <div class="product">
+
+            <div class="product-image">
+
+                <img src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?auto=format&fit=crop&w=900&q=90">
+
+            </div>
+
+            <div class="product-body">
+
+                <h3>Triplo Cheddar</h3>
+
+                <p>
+                    Pão, 3 carnes, cheddar, alface, tomate e molho.
+                </p>
+
+                <div class="price">R$ 19,00</div>
+
+                <button class="add"
+                    onclick="adicionar('Triplo Cheddar',19)">
+                    🛒 ADICIONAR
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 11 -->
+
+        <div class="product">
+
+            <div class="product-image">
+
+                <img src="https://images.unsplash.com/photo-1603064752734-4c48eff53d05?auto=format&fit=crop&w=900&q=90">
+
+            </div>
+
+            <div class="product-body">
+
+                <h3>Triplo Cheddar Bacon</h3>
+
+                <p>
+                    Pão, 3 carnes, cheddar, bacon e molho.
+                </p>
+
+                <div class="price">R$ 22,00</div>
+
+                <button class="add"
+                    onclick="adicionar('Triplo Cheddar Bacon',22)">
+                    🛒 ADICIONAR
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 12 -->
+
+        <div class="product">
+
+            <div class="product-image">
+
+                <img src="https://images.unsplash.com/photo-1585238342024-78d387f4a707?auto=format&fit=crop&w=900&q=90">
+
+            </div>
+
+            <div class="product-body">
+
+                <h3>X-Calabresa</h3>
+
+                <p>
+                    Pão, carne, calabresa, queijo, alface e molho.
+                </p>
+
+                <div class="price">R$ 12,00</div>
+
+                <button class="add"
+                    onclick="adicionar('X-Calabresa',12)">
+                    🛒 ADICIONAR
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ESPECIAIS ================= -->
+
+<section class="container" id="especiais">
+
+    <div class="title">
+
+        <small>⭐ MAIS PEDIDOS</small>
+
+        <h2>Especiais da Casa</h2>
+
+    </div>
+
+
+    <div class="featured">
+
+
+        <div class="feature">
+
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1000&q=90">
+
+            <div class="feature-info">
+
+                <h3>Clássico da Casa</h3>
+
+                <p>
+                    Pão de brioche, costela,
+                    cheddar, bacon, maionese
+                    da casa e batata palha.
+                </p>
+
+                <div class="feature-price">
+                    R$ 30,00
+                </div>
+                <button class="add feature-add" onclick="adicionar('Clássico da Casa',30)">
+                    🛒 ADICIONAR AO CARRINHO
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="feature">
+
+            <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433a?auto=format&fit=crop&w=1000&q=90">
+
+            <div class="feature-info">
+
+                <h3>Vila 1</h3>
+
+                <p>
+                    Brioche, carne, cheddar,
+                    bacon, ovo, nuggets e batata.
+                </p>
+
+                <div class="feature-price">
+                    R$ 49,90
+                </div>
+                <button class="add feature-add" onclick="adicionar('Vila 1',49.9)">
+                    🛒 ADICIONAR AO CARRINHO
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="feature">
+
+            <img src="https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?auto=format&fit=crop&w=1000&q=90">
+
+            <div class="feature-info">
+
+                <h3>Trio Macies</h3>
+
+                <p>
+                    Lanche completo acompanhado
+                    de batata e bebida.
+                </p>
+
+                <div class="feature-price">
+                    R$ 59,90
+                </div>
+                <button class="add feature-add" onclick="adicionar('Trio Macies',59.9)">
+                    🛒 ADICIONAR AO CARRINHO
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= LISTAS ================= -->
+
+<section class="container">
+
+    <div class="lists">
+
+        <div class="list">
+
+            <h3>➕ Adicionais</h3>
+
+            <div class="list-item">
+                <span>Ovo</span>
+                <strong>R$ 2,00</strong>
+                <button class="plus"
+                    onclick="adicionar('Ovo',2)">+</button>
+            </div>
+
+            <div class="list-item">
+                <span>Bacon</span>
+                <strong>R$ 3,00</strong>
+                <button class="plus"
+                    onclick="adicionar('Bacon',3)">+</button>
+            </div>
+
+            <div class="list-item">
+                <span>Carne</span>
+                <strong>R$ 3,00</strong>
+                <button class="plus"
+                    onclick="adicionar('Carne',3)">+</button>
+            </div>
+
+            <div class="list-item">
+                <span>Cheddar</span>
+                <strong>R$ 2,50</strong>
+                <button class="plus"
+                    onclick="adicionar('Cheddar',2.5)">+</button>
+            </div>
+
+        </div>
+
+
+        <div class="list">
+
+            <h3>🍟 Porções</h3>
+
+            <div class="list-item">
+                <span>Batata Frita P</span>
+                <strong>R$ 10</strong>
+                <button class="plus"
+                    onclick="adicionar('Batata Frita P',10)">+</button>
+            </div>
+
+            <div class="list-item">
+                <span>Batata Frita M</span>
+                <strong>R$ 22</strong>
+                <button class="plus"
+                    onclick="adicionar('Batata Frita M',22)">+</button>
+            </div>
+
+            <div class="list-item">
+                <span>Calabresa Acebolada</span>
+                <strong>R$ 25</strong>
+                <button class="plus"
+                    onclick="adicionar('Calabresa Acebolada',25)">+</button>
+            </div>
+
+            <div class="list-item">
+                <span>Batata Maluca</span>
+                <strong>R$ 30</strong>
+                <button class="plus"
+                    onclick="adicionar('Batata Maluca',30)">+</button>
+            </div>
+
+        </div>
+
+
+        <div class="list">
+
+            <h3>🍓 Açaí</h3>
+
+            <div class="list-item">
+                <span>300 ml</span>
+                <strong>R$ 10</strong>
+                <button class="plus"
+                    onclick="adicionar('Açaí 300ml',10)">+</button>
+            </div>
+
+            <div class="list-item">
+                <span>400 ml</span>
+                <strong>R$ 12</strong>
+                <button class="plus"
+                    onclick="adicionar('Açaí 400ml',12)">+</button>
+            </div>
+
+            <div class="list-item">
+                <span>500 ml</span>
+                <strong>R$ 14</strong>
+                <button class="plus"
+                    onclick="adicionar('Açaí 500ml',14)">+</button>
+            </div>
+
+            <div class="list-item">
+                <span>770 ml</span>
+                <strong>R$ 19,50</strong>
+                <button class="plus"
+                    onclick="adicionar('Açaí 770ml',19.5)">+</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CARRINHO ================= -->
+
+<div class="cart" id="cart">
+
+    <div class="cart-header">
+
+        <h2>🛒 Meu Pedido</h2>
+
+        <button class="close"
+            onclick="fecharCarrinho()">
+            ×
+        </button>
+
+    </div>
+
+    <div class="cart-items" id="cartItems">
+
+        <div class="empty">
+            🛒<br><br>
+            Seu carrinho está vazio.
+        </div>
+
+    </div>
+
+    <div class="cart-footer">
+
+        <div class="total">
+
+            <span>Total</span>
+
+            <strong>
+                R$ <span id="total">0,00</span>
+            </strong>
+
+        </div>
+
+        <button class="checkout"
+            onclick="abrirCheckout()">
+
+            FINALIZAR PEDIDO
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= CHECKOUT ================= -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <h2>📋 Finalizar pedido</h2>
+
+            <button class="close"
+                onclick="fecharCheckout()">
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="input">
+
+            <label>Nome</label>
+
+            <input
+                id="nome"
+                placeholder="Seu nome">
+
+        </div>
+
+
+        <div class="input">
+
+            <label>Telefone</label>
+
+            <input
+                id="telefone"
+                placeholder="(24) 99999-9999">
+
+        </div>
+
+
+        <div class="input">
+
+            <label>Endereço</label>
+
+            <input
+                id="endereco"
+                placeholder="Rua e número">
+
+        </div>
+
+
+        <div class="input">
+
+            <label>Bairro</label>
+
+            <input
+                id="bairro"
+                placeholder="Seu bairro">
+
+        </div>
+
+
+        <div class="input">
+
+            <label>Referência</label>
+
+            <input
+                id="referencia"
+                placeholder="Ex: casa azul">
+
+        </div>
+
+
+        <div class="input">
+
+            <label>Observação</label>
+
+            <textarea
+                id="observacao"
+                rows="3"
+                placeholder="Ex: sem cebola..."></textarea>
+
+        </div>
+
+
+        <div class="input">
+
+            <label>Pagamento</label>
+
+            <div class="payment">
+
+                <label>
+                    <input
+                        type="radio"
+                        name="pagamento"
+                        value="Pix"
+                        onclick="mostrarPix()">
+                    📱 Pix
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="pagamento"
+                        value="Cartão"
+                        onclick="esconderPix()">
+                    💳 Cartão
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <div class="pix" id="pix">
+
+            <strong>📱 PIX</strong>
+
+            <p style="margin-top:8px;color:#aaa">
+                A chave Pix da loja será informada
+                durante o atendimento pelo WhatsApp.
+            </p>
+
+        </div>
+
+
+        <button class="send"
+            onclick="enviarPedido()">
+
+            📲 ENVIAR PEDIDO PELO WHATSAPP
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer id="contato">
+
+    <h2>🍔 LANCHONETE 3 IRMÃOS</h2>
+
+    <p>
+        Hambúrgueres • Porções • Açaí
+    </p>
+
+    <p>
+        📱 (24) 99923-0095
+    </p>
+
+    <a
+        class="whatsapp"
+        href="https://wa.me/5524999230095"
+        target="_blank">
+
+        💬 Falar no WhatsApp
+
+    </a>
+
+</footer>
+
+
+<script>
+
+const WHATSAPP = "5524999230095";
+
+let carrinho = [];
+
+
+/* ================= CARRINHO ================= */
+
+function adicionar(nome,preco){
+
+    let item = carrinho.find(
+        x => x.nome === nome
+    );
+
+    if(item){
+
+        item.quantidade++;
+
+    }else{
+
+        carrinho.push({
+            nome:nome,
+            preco:preco,
+            quantidade:1
+        });
+
+    }
+
+    atualizar();
+
+    abrirCarrinho();
+}
+
+
+function atualizar(){
+
+    const area =
+        document.getElementById("cartItems");
+
+    const totalElemento =
+        document.getElementById("total");
+
+    const contador =
+        document.getElementById("contador");
+
+    area.innerHTML = "";
+
+    let total = 0;
+    let quantidade = 0;
+
+
+    if(carrinho.length === 0){
+
+        area.innerHTML = \`
+            <div class="empty">
+                🛒<br><br>
+                Seu carrinho está vazio.
+            </div>
+        \`;
+
+        totalElemento.innerText = "0,00";
+        contador.innerText = "0";
+
+        return;
+    }
+
+
+    carrinho.forEach((item,index)=>{
+
+        let subtotal =
+            item.preco * item.quantidade;
+
+        total += subtotal;
+
+        quantidade += item.quantidade;
+
+
+        const div =
+            document.createElement("div");
+
+        div.className = "cart-item";
+
+        div.innerHTML = \`
+
+            <div class="cart-item-top">
+
+                <strong>
+                    ${item.nome}
+                </strong>
+
+                <strong>
+                    R$ ${subtotal
+                        .toFixed(2)
+                        .replace(".",",")}
+                </strong>
+
+            </div>
+
+            <div class="quantity">
+
+                <button
+                    onclick="diminuir(${index})">
+                    −
+                </button>
+
+                <strong>
+                    ${item.quantidade}
+                </strong>
+
+                <button
+                    onclick="aumentar(${index})">
+                    +
+                </button>
+
+                <button
+                    class="delete"
+                    onclick="remover(${index})">
+                    🗑
+                </button>
+
+            </div>
+        \`;
+
+        area.appendChild(div);
+
+    });
+
+
+    totalElemento.innerText =
+        total.toFixed(2).replace(".",",");
+
+    contador.innerText = quantidade;
+}
+
+
+function aumentar(index){
+
+    carrinho[index].quantidade++;
+
+    atualizar();
+}
+
+
+function diminuir(index){
+
+    if(carrinho[index].quantidade > 1){
+
+        carrinho[index].quantidade--;
+
+    }else{
+
+        carrinho.splice(index,1);
+
+    }
+
+    atualizar();
+}
+
+
+function remover(index){
+
+    carrinho.splice(index,1);
+
+    atualizar();
+}
+
+
+/* ================= ABRIR CARRINHO ================= */
+
+function abrirCarrinho(){
+
+    document
+        .getElementById("cart")
+        .classList.add("active");
+
+}
+
+
+function fecharCarrinho(){
+
+    document
+        .getElementById("cart")
+        .classList.remove("active");
+
+}
+
+
+/* ================= CHECKOUT ================= */
+
+function abrirCheckout(){
+
+    if(carrinho.length === 0){
+
+        alert("Adicione algum produto primeiro!");
+
+        return;
+    }
+
+    fecharCarrinho();
+
+    document
+        .getElementById("modal")
+        .classList.add("active");
+}
+
+
+function fecharCheckout(){
+
+    document
+        .getElementById("modal")
+        .classList.remove("active");
+
+}
+
+
+/* ================= PAGAMENTO ================= */
+
+function mostrarPix(){
+
+    document
+        .getElementById("pix")
+        .classList.add("active");
+
+}
+
+
+function esconderPix(){
+
+    document
+        .getElementById("pix")
+        .classList.remove("active");
+
+}
+
+
+/* ================= WHATSAPP ================= */
+
+function enviarPedido(){
+
+    if(carrinho.length === 0){
+
+        alert("Seu carrinho está vazio!");
+
+        return;
+    }
+
+
+    const nome =
+        document.getElementById("nome").value.trim();
+
+    const telefone =
+        document.getElementById("telefone").value.trim();
+
+    const endereco =
+        document.getElementById("endereco").value.trim();
+
+    const bairro =
+        document.getElementById("bairro").value.trim();
+
+    const referencia =
+        document.getElementById("referencia").value.trim();
+
+    const observacao =
+        document.getElementById("observacao").value.trim();
+
+    const pagamento =
+        document.querySelector(
+            'input[name="pagamento"]:checked'
+        );
+
+
+    if(!nome ||
+       !telefone ||
+       !endereco ||
+       !bairro){
+
+        alert(
+            "Preencha seu nome, telefone, endereço e bairro."
+        );
+
+        return;
+    }
+
+
+    if(!pagamento){
+
+        alert("Escolha a forma de pagamento.");
+
+        return;
+    }
+
+
+    let total = 0;
+
+
+    let mensagem =
+        "🍔 *NOVO PEDIDO - LANCHONETE 3 IRMÃOS*";
+
+    mensagem += "\n\n";
+
+
+    mensagem +=
+        "👤 *Cliente:* " +
+        nome;
+
+    mensagem += "\n";
+
+    mensagem +=
+        "📱 *Telefone:* " +
+        telefone;
+
+    mensagem += "\n\n";
+
+
+    mensagem +=
+        "🛒 *PEDIDO:*";
+
+    mensagem += "\n";
+
+
+    carrinho.forEach(item=>{
+
+        const subtotal =
+            item.preco *
+            item.quantidade;
+
+        total += subtotal;
+
+        mensagem +=
+            "• " +
+            item.quantidade +
+            "x " +
+            item.nome +
+            " — R$ " +
+            subtotal
+                .toFixed(2)
+                .replace(".",",");
+
+        mensagem += "\n";
+
+    });
+
+
+    mensagem += "\n";
+
+
+    mensagem +=
+        "💰 *TOTAL: R$ " +
+        total
+            .toFixed(2)
+            .replace(".",",") +
+        "*";
+
+
+    mensagem += "\n\n";
+
+
+    mensagem +=
+        "🛵 *ENTREGA*";
+
+    mensagem += "\n";
+
+    mensagem +=
+        "📍 " + endereco;
+
+    mensagem += "\n";
+
+    mensagem +=
+        "🏘️ " + bairro;
+
+
+    if(referencia){
+
+        mensagem +=
+            "\n📌 Referência: " +
+            referencia;
+
+    }
+
+
+    mensagem += "\n\n";
+
+
+    mensagem +=
+        "💳 *Pagamento:* " +
+        pagamento.value;
+
+
+    if(observacao){
+
+        mensagem +=
+            "\n📝 Observação: " +
+            observacao;
+
+    }
+
+
+    mensagem +=
+        "\n\n🔥 Obrigado pelo pedido!";
+
+
+    const url =
+        "https://wa.me/" +
+        WHATSAPP +
+        "?text=" +
+        encodeURIComponent(mensagem);
+
+
+    window.open(url,"_blank");
+
+}
+
+
+/* ================= INICIAR ================= */
+
+atualizar();
+
+</script>
+
+</body>
+</html>
